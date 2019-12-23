@@ -1,0 +1,63 @@
+{
+  "name": "INSTA_RED",
+  "productName": "INSTA_RED",
+  "version": "4.1.0",
+  "description": "THE BEST INSTAGRAM COMMUNICATION SOLUTION",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron . --disable-gpu --disable-d3d11",
+    "build:win32": "electron-builder --win --ia32",
+    "build:win64": "electron-builder --win --x64",
+    "build:win": "npm run build:win32 && npm run build:win64",
+    "build": "electron-builder build --win --publish never",
+    "deploy": "electron-builder build --win --publish always"
+  },
+  "build": {
+    "productName": "INSTA_RED",
+    "publish": {
+      "provider": "github",
+      "owner": "instarule7",
+      "repo": "INSTA_RED"
+    },
+    "appId": "INSTA_RED",
+    "asar": true,
+    "protocols": {
+      "name": "INSTA_RED",
+      "schemes": ["INSTA_RED"]
+    },
+    "win": {
+      "publish": [
+        "github"
+      ],
+      "remoteRelease": "https://github.com/instarule7/INSTA_RED",
+      "target": [
+        "zip",
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": false
+    },
+    "directories": {
+      "buildResources": "resources/installer/",
+      "output": "dist/",
+      "app": "."
+    },
+    "repository": {
+      "type" : "git",
+      "url" : "https://github.com/instarule7/INSTA_RED.git"
+    }
+  },
+  "dependencies": {
+    "angular-chart.js": "^1.1.1",
+    "electron-prompt": "^1.3.1",
+    "electron-updater": "^4.2.0",
+    "getmac": "^1.4.6",
+    "instagram-private-api": "^1.36.1",
+    "ip": "^1.1.5"
+  },
+  "devDependencies": {
+    "electron": "^6.0.2",
+    "electron-builder": "^21.2.0"
+  }
+}

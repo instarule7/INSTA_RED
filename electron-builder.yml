@@ -1,0 +1,4 @@
+appId: INSTA_RED
+publish:
+  provider: github
+  token: [eeabaa7b6131872c6a32d1115e30d34d7f6f0089]

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>THE BEST INSTAGRAM COMMUNICATION SOLUTION</title>
+
+	 <link rel="stylesheet" href="css/generic.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="bower_components/ionicons/docs/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/ui-cropper/compile/minified/ui-cropper.css" />
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css" />
+  </head>
+  <body class="p-r f-l w-100 h-100" ng-app="instarule">
+    <!-- 업데이트 알림부분 -->
+    <div id="notification" class="hidden">
+      <p id="message"></p>
+      <button id="close-button" onClick="closeNotification()">
+        닫기
+      </button>
+      <button id="restart-button" onClick="restartApp()" class="hidden">
+        재시작
+      </button>
+    </div>
+
+    <script>
+      const { ipcRenderer } = require('electron');
+      const version = document.getElementById('version');
+      
+      ipcRenderer.send('app_version');
+      ipcRenderer.on('app_version', (event, arg) => {
+        ipcRenderer.removeAllListeners('app_version');
+        version.innerText = 'Version ' + arg.version;
+      });
+
+      const notification = document.getElementById('notification');
+      const message = document.getElementById('message');
+      const restartButton = document.getElementById('restart-button');
+      ipcRenderer.on('update_available', () => {
+        ipcRenderer.removeAllListeners('update_available');
+        message.innerText = 'A new update is available. Downloading now...';
+        notification.classList.remove('hidden');
+      });
+      ipcRenderer.on('update_downloaded', () => {
+        ipcRenderer.removeAllListeners('update_downloaded');
+        message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+        restartButton.classList.remove('hidden');
+        notification.classList.remove('hidden');
+      });
+
+      function closeNotification() {
+        notification.classList.add('hidden');
+      }
+      function restartApp() {
+        ipcRenderer.send('restart_app');
+      }
+    </script>
+
+    <!-- Bower Components Section -->
+    <!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- <script src="bower_components/jquery-simulate-ext/libs/bililiteRange.js"></script>
+    <script src="bower_components/jquery-simulate-ext/libs/jquery.simulate.js"></script>
+    <script src="bower_components/jquery-simulate-ext/src/jquery.simulate.ext.js"></script>
+    <script src="bower_components/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js"></script>
+    <script src="bower_components/jquery-simulate-ext/src/jquery.simulate.key-sequence.js"></script>
+    <script src="bower_components/jquery-simulate-ext/src/jquery.simulate.key-combo.js"></script> -->
+    <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="bower_components/angular-scroll/angular-scroll.js"></script>
+    <script src="bower_components/ng-enter/ngEnter.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="bower_components/ui-cropper/compile/unminified/ui-cropper.js"></script>
+    <script src="bower_components/ionicons/docs/ionicons.js"></script>
+    <script src="bower_components/ngSweetAlert/SweetAlert.min.js"></script>
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <!-- Instarule Scripts Section -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/services.js"></script>
+    <script src="scripts/filters.js"></script>
+
+    <script src="scripts/services/variableService.js"></script>
+    <script src="scripts/services/startService.js"></script>
+    <script src="scripts/services/loginService.js"></script>
+    <script src="scripts/services/commonService.js"></script>
+    <script src="scripts/services/actionService.js"></script>
+    <script src="scripts/services/disposeService.js"></script>
+    <script src="scripts/services/filterService.js"></script>
+    <script src="scripts/services/setService.js"></script>
+    <script src="scripts/services/intervalService.js"></script>
+    <script src="scripts/services/getService.js"></script>
+    <script src="scripts/services/timeLabService.js"></script>
+    <script src="scripts/services/cancelService.js"></script>
+    <script src="scripts/services/storyService.js"></script>
+
+		<script src="scripts/mainCtrl.js"></script>
+
+    <script src="scripts/directives/loginDir.js"></script>
+    <script src="scripts/directives/dashboardDir.js"></script>
+    <script src="scripts/directives/loadingBarDir.js"></script>
+    <script src="scripts/directives/performanceDir.js"></script>
+    <script src="scripts/directives/headerDir.js"></script>
+    <script src="scripts/directives/actionDir.js"></script>
+    <script src="scripts/directives/logDir.js"></script>
+    <script src="scripts/directives/setListDir.js"></script>
+    <script src="scripts/directives/setFilterDir.js"></script>
+    <script src="scripts/directives/setActionDir.js"></script>
+    <script src="scripts/directives/emoticonDir.js"></script>
+
+    <script src="scripts/dialogs/selectFunctionsCtrl.js"></script>
+    <script src="scripts/dialogs/oneTouchLoginCtrl.js"></script>
+
+		<!-- Instarule Templates Route Section -->
+		<div class="p-r f-l w-100 h-100" ui-view></div>
+  </body>
+</html>
