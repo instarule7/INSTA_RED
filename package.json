@@ -57,7 +57,7 @@
     "ip": "^1.1.5"
   },
   "devDependencies": {
-    "electron": "^6.0.2",
+    "electron": "^11.5.0",
     "electron-builder": "^21.2.0"
   }
 }
